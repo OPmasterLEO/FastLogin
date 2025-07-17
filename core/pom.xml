@@ -66,6 +66,10 @@
                 <enabled>false</enabled>
             </releases>
         </repository>
+        <repository>
+            <id>wdsj</id>
+            <url>https://repo.wdsj.io/repository/minecraft/</url>
+        </repository>
     </repositories>
 
     <build>

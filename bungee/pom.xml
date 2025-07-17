@@ -109,6 +109,11 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+
+        <repository>
+            <id>wdsj</id>
+            <url>https://repo.wdsj.io/repository/minecraft/</url>
+        </repository>
     </repositories>
 
     <dependencies>

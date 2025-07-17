@@ -42,6 +42,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.Metadatable;
 import org.geysermc.floodgate.api.player.FloodgatePlayer;
 
+import static com.github.games647.fastlogin.bukkit.FastLoginBukkit.getUniversalScheduler;
+
 /**
  * This listener tells authentication plugins weather the player has a premium account. So the
  * plugin can skip authentication.
@@ -68,7 +70,7 @@ public class ConnectionListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent joinEvent) {
         Player player = joinEvent.getPlayer();
 
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        getUniversalScheduler().runTaskLater(player, () -> {
             delayForceLogin(player);
             // delay the login process to let auth plugins initialize the player
             // Magic number however as there is no direct event from those plugins
@@ -89,7 +91,7 @@ public class ConnectionListener implements Listener {
                 FloodgatePlayer floodgatePlayer = floodgateService.getBedrockPlayer(player.getUniqueId());
                 if (floodgatePlayer != null) {
                     Runnable floodgateAuthTask = new FloodgateAuthTask(plugin.getCore(), player, floodgatePlayer);
-                    Bukkit.getScheduler().runTaskAsynchronously(plugin, floodgateAuthTask);
+                    getUniversalScheduler().runTaskAsynchronously(floodgateAuthTask);
                     plugin.getBungeeManager().markJoinEventFired(player);
                     return;
                 }
@@ -101,7 +103,7 @@ public class ConnectionListener implements Listener {
                 + "when the command from the proxy is received");
         } else {
             Runnable forceLoginTask = new ForceLoginTask(plugin.getCore(), player, session);
-            Bukkit.getScheduler().runTaskAsynchronously(plugin, forceLoginTask);
+            getUniversalScheduler().runTaskAsynchronously(forceLoginTask);
         }
 
         plugin.getBungeeManager().markJoinEventFired(player);

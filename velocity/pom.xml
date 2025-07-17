@@ -144,6 +144,10 @@
             <id>opencollab</id>
             <url>https://repo.opencollab.dev/main/</url>
         </repository>
+        <repository>
+            <id>wdsj</id>
+            <url>https://repo.wdsj.io/repository/minecraft/</url>
+        </repository>
     </repositories>
 
     <dependencies>
